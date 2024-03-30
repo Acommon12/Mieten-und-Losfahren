@@ -1,0 +1,23 @@
+# Navigiere zum Verzeichnis, in dem sich dein Projekt befindet
+cd C:/Users/aclbu/Desktop/Codes
+
+# Erstelle eine README.md-Datei mit dem Inhalt "Mieten-und-Losfahren"
+echo "# Mieten-und-Losfahren" >> README.md
+
+# Erstelle eine .gitignore-Datei für Node.js-Projekte
+echo "node_modules/" >> .gitignore
+
+# Initialisiere ein lokales Git-Repository
+git init
+
+# Füge alle Dateien zum Repository hinzu
+git add .
+
+# Führe den Commit durch
+git commit -m "Erster Commit mit README und .gitignore"
+
+# Setze den Remote-Repository-Link
+git remote add origin https://github.com/Acommon12/Mieten-und-Losfahren.git
+
+# Pushe deine Änderungen auf GitHub
+git push -u origin main
