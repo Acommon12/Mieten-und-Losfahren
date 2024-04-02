@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page mit ManyChat Widgets</title>
+    <!-- GitHub Image Import -->
+    <link rel="import" href="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png">
+    <!-- End GitHub Image Import -->
+    <!-- Styling for Animation -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png");
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            position: relative; /* Setze Position auf relativ */
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .animated-object {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .animated-object.upper {
+            top: 0;
+            left: -100px;
+            animation-name: moveRightTop;
+        }
+
+        .animated-object.lower {
+            bottom: 0;
+            left: -100px;
+            animation-name: moveRightBottom;
+        }
+
+        @keyframes moveRightTop {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
+        @keyframes moveRightBottom {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+    </style>
+    <!-- End Styling for Animation -->
+</head>
+<body>
+    <!-- Landing Page Content -->
+    <div>
+        <h1>Willkommen auf meiner Homepage</h1>
+        <p>Hauptmenü.</p>
+    </div>
+    <!-- End Landing Page Content -->
+
+    <!-- Animation -->
+    <div class="animation-container">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object upper" alt="Obere Animation" style="width: 80%;">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object lower" alt="Untere Animation" style="width: 60%;">
+    </div>
+    <!-- End Animation -->
+
+    <!-- ManyChat Widget -->
+    <div style="position: fixed; bottom: 0; right: 20px; z-index: 9999;">
+        <iframe src="https://manychat.com/l10/187720794434952" scrolling="no" style="width: 350px; height: 500px; border: none;"></iframe>
+    </div>
+    <!-- End ManyChat Widget -->
+
+    <!-- JavaScript Redirection after Delay -->
+    <script>
+        setTimeout(function() {
+            window.location.href = "https://m.me/187720794434952?ref=_wilkommen";
+        }, 4000); // Delay in milliseconds (here: 4000ms or 4 seconds)
+    </script>
+    <!-- End JavaScript Redirection after Delay -->
+
+    <!-- Link to Open HTML File -->
+    <a href="data:text/html;charset=utf-8;base64,PCFET0NUWVBFIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPjxzdHlsZT4KICAgIGJvZHkgeyBtYXJnaW46IDA7IG1pbi13aWR0aDogMTAwJTsgYmFja2dyb3VuZC1zaXplOiA4MCU7ICBiYWNrZ3JvdW5kLWltYWdlOiBodHRwczovL3Jhdy5naXRodWIuaW8vQWNvbW91bjEyL01pZXRlbi11bmQtTG9zZmFocmVuL21haW4vOTYweDEyMDBzcHNhbGUucG5nOyAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7ICBiYWNrZ3JvdW5kLWF0dGVtcHRlZDogZml4ZWQ7ICBoZWlnaHQ6IDEwMHZoOyB9CiAgICBiYWRnZW5kLWlucHV0IHsgcG9zaXRpb246IHJlbGF0aXZlOyB3aWR0aDogMTAwJTsgaGVpZ2h0OiBhdXRvOyB9CiAgICAiYW5pbWF0aW9uLWNvbnRhaW5lciB7IHBvc2l0aW9uOiByZWxhdGl2ZTsgfQo8L3N0eWxlPjwvaGVhZD48Ym9keT4KICAgIDxkaXYgY2xhc3M9ImFuaW1hdGlvbi1jb250YWluZXIiPiAgICAgICA8aDE+V2lsbGVuY2VyIG9mZiBtdW5uZWw8L2gxPiAgICAgIDxwPkhlbGxvLCB3ZWxsLiA8L3A+ICA8L2Rpdj48L2JvZHk+PC9odG1sPg==" target="_blank">Klicken Sie hier, um die HTML-Datei anzuzeigen</a>
+    <!-- End Link to Open HTML File -->
+</body>
+</html>
