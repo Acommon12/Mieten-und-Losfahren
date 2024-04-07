@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page mit Swipe-Funktionalität und Widgets</title>
+    <!-- Weitere Metatags oder CSS-Stylesheets können hier eingefügt werden -->
+
+    <!-- Styling für Animation -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png");
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            position: relative; /* Setze Position auf relativ */
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .animated-object {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .animated-object.upper {
+            top: 0;
+            left: -100px;
+            animation-name: moveRightTop;
+        }
+
+        .animated-object.lower {
+            bottom: 0;
+            left: -100px;
+            animation-name: moveRightBottom;
+        }
+
+        @keyframes moveRightTop {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
+        @keyframes moveRightBottom {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+    </style>
+    <!-- Ende Styling für Animation -->
+</head>
+<body>
+    <!-- Landing Page Inhalt -->
+    <div>
+        <h1>Willkommen auf meiner Homepage</h1>
+        <p>Hauptmenü.</p>
+    </div>
+    <!-- Ende Landing Page Inhalt -->
+
+    <!-- Animation -->
+    <div class="animation-container">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object upper" alt="Obere Animation" style="width: 70%;">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object lower" alt="Untere Animation" style="width: 70%;">
+    </div>
+    <!-- Ende Animation -->
+
+    <!-- ManyChat Widget -->
+    <div id="manychat-widget" style="position: fixed; bottom: 0; right: 20px; z-index: 9999; display: none;">
+        <!-- ManyChat Widget-Code hier einfügen -->
+        <div class="mcwidget-embed" data-widget-id="23945361"></div>
+        <script src="//widget.manychat.com/23945361.js" async="async"></script>
+    </div>
+    <!-- Ende ManyChat Widget -->
+
+    <!-- Opt-In Button -->
+    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
+        <button id="optInButton" onclick="handleOptIn()">Opt-In</button>
+    </div>
+    <!-- Ende Opt-In Button -->
+
+    <!-- JavaScript für Opt-In und Swipe -->
+    <script>
+        function handleOptIn() {
+            document.getElementById('manychat-widget').style.display = 'block';
+            const postData = {
+                action: 'opt-in'
+            };
+            fetch('https://manychat.com/l10/187720794434952', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        }
+
+        function handleSwipe() {
+            console.log('Swipe wurde erkannt!');
+            var cdnfsbxLink = "https://cdn.fbsbx.com/v/t59.2708-21/434938757_1236902507287861_829795429915253275_n.html/cdnfsbx.html?_nc_cat=107&ccb=1-7&_nc_sid=2b0e22&_nc_ohc=B9I7ll4mrLAAb7IXvoI&_nc_ht=cdn.fbsbx.com&oh=03_AdVtNIA77X6TFWEZvsiLcFtV-_9l5dRVXFESpOIqPAWSOg&oe=66108FD1&dl=1&fbclid=IwAR3twicWuOVSnTQuRoqLjZHYlDWQz9cr7Vuhg2p8LkXk-OVnaAUqw4RFwow_aem_ATZuhSfwK06hM5tC62i6brlKWcbZD2_mxKl99xwUflW36nL8dvtl_xt21gDs_gRUW_I1QhPWWyN7nweZ_IeDguqn";
+            var img = new Image();
+            img.onload = function() {
+                document.body.style.backgroundImage = "url('" + cdnfsbxLink + "')";
+            };
+            img.onerror = function() {
+                console.error('Ungültige CDNFSBX-URL oder Datei konnte nicht geladen werden.');
+            };
+            img.src = cdnfsbxLink;
+        }
+
+        let startX = 0;
+        let startY = 0;
+
+        document.addEventListener('touchstart', function(event) {
+            startX = event.touches[0].clientX;
+            startY = event.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', function(event) {
+            const endX = event.changedTouches[0].clientX;
+            const endY = event.changedTouches[0].clientY;
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    handleSwipe();
+                } else {
+                    // Hier können Sie weitere Aktionen hinzufügen, falls gewünscht
+                }
+            }
+        });
+
+        document.addEventListener('mousedown', function(event) {
+            startX = event.clientX;
+            startY = event.clientY;
+        });
+
+        document.addEventListener('mouseup', function(event) {
+            const endX = event.clientX;
+            const endY = event.clientY;
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    handleSwipe();
+                } else {
+                    // Hier können Sie weitere Aktionen hinzufügen, falls gewünscht
+                }
+            }
+        });
+    </script>
+    <!-- Ende JavaScript für Opt-In und Swipe -->
+</body>
+</html>

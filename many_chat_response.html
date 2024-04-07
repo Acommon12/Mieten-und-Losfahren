@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset='utf-8'>
+  <title>Contact "Mieten und Losfahren" through Facebook Messenger</title>
+  <meta name="generator" content="Manychat — FB Messenger bot builder">
+  <meta property="og:title" content="Landing Page – by Manychat">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="https://graph.facebook.com/187720794434952/picture?type=large">
+  <meta name="twitter:card" content="https://graph.facebook.com/187720794434952/picture?type=large">
+  <meta name="og:site_name" content="ManyChat, Inc.">
+  <meta name="twitter:image:alt" content="Mieten und Losfahren – by Manychat">
+  <meta property="fb:app_id" content="532160876956612">
+  <link rel="icon" type="image/png" href="/assets/img/favicons/favicon_logo.png">
+  <link rel="mask-icon" color="#000" href="/assets/img/favicons/touchbar_logo_icon.svg">
+  <script src="//widget.manychat.com/187720794434952.js"></script>
+</head>
+<body>
+  <div id="mcwidget-landing" data-widget-id="23748035"></div>
+
+  <script>
+    // Erstelle die JSON-Struktur für die Antwort
+    const responseJSON = {
+      "content": [
+        {
+          "type": "text",
+          "text": "Vielen Dank für Ihr Interesse! Bitte bestätigen Sie Ihre Anmeldung durch Klicken auf die unten stehende Schaltfläche."
+        }
+      ],
+      "quick_replies": [
+        {
+          "type": "button",
+          "title": "Ja, ich möchte fortfahren",
+          "payload": "{\"action\":\"subscribe\"}"
+        }
+      ]
+    };
+
+    // Konvertiere die JSON-Struktur in einen String
+    const responseString = JSON.stringify(responseJSON);
+
+    // Sende die JSON-Antwort als Text zurück
+    document.body.textContent = responseString;
+  </script>
+</body>
+</html>
