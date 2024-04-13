@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page mit Book und ManyChat Widgets</title>
+    <!-- GitHub Image Import -->
+    <link rel="import" href="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png">
+    <!-- End GitHub Image Import -->
+    <!-- Styling for Animation -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png");
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            position: relative; /* Setze Position auf relativ */
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .animated-object {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .animated-object.upper {
+            top: 0;
+            left: -100px;
+            animation-name: moveRightTop;
+        }
+
+        .animated-object.lower {
+            bottom: 0;
+            left: -100px;
+            animation-name: moveRightBottom;
+        }
+
+        @keyframes moveRightTop {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
+        @keyframes moveRightBottom {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+    </style>
+    <!-- End Styling for Animation -->
+
+    <!-- React and ReactDOM -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- React Webcam -->
+    <script src="https://unpkg.com/react-webcam/umd/react-webcam.development.js"></script>
+
+    <!-- React Geolocated -->
+    <script src="https://unpkg.com/react-geolocated/umd/react-geolocated.development.js"></script>
+
+    <!-- React Chat Elements -->
+    <script src="https://unpkg.com/react-chat-elements/dist/main.js"></script>
+
+    <!-- JavaScript für die Auswahl zwischen Desktop- und mobiler Version -->
+    <script>
+        function chooseVersion(version) {
+            if (version === 'desktop') {
+                document.getElementById('mobile-styles').remove();
+            } else if (version === 'mobile') {
+                var style = document.createElement('style');
+                style.setAttribute('id', 'mobile-styles');
+                style.innerHTML = `
+                    /* Hier die zusätzlichen Stile für die mobile Version einfügen */
+                    body {
+                        background-size: 100%;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        function openBook() {
+            // Hier wird das ManyChat-Widget sichtbar gemacht
+            document.getElementById('book-widget').classList.remove('hidden');
+        }
+    </script>
+    <!-- End JavaScript für die Auswahl zwischen Desktop- und mobiler Version -->
+</head>
+<body>
+    <!-- Landing Page Content -->
+    <div>
+        <h1>Willkommen auf meiner Homepage</h1>
+        <p>Hauptmenü.</p>
+    </div>
+    <!-- End Landing Page Content -->
+
+    <!-- Animation -->
+    <div class="animation-container">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object upper" alt="Obere Animation" style="width: 70%;">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object lower" alt="Untere Animation" style="width: 70%;">
+    </div>
+    <!-- End Animation -->
+
+    <!-- Book Widget (vorerst ausgeblendet) -->
+    <div id="book-widget" style="position: fixed; bottom: 0; right: 20px; z-index: 9999;">
+        <!-- Book Widget-Code hier einfügen -->
+        <script src="//widget.book.com/187720794434952.js" async="async"></script>
+    </div>
+    <!-- End Book Widget -->
+
+    <!-- ManyChat Widget -->
+    <div id="manychat-widget" style="position: fixed; bottom: 0; right: 20px; z-index: 9999;">
+        <!-- Hier wird die 2. Landingpage nach der Verzögerung eingefügt -->
+        <iframe src="zweite_landingpage.html" scrolling="no" style="width: 100%; height: 100%; border: none;"></iframe>
+        <!-- Ende des Einfügens der 2. Landingpage -->
+    </div>
+    <!-- End ManyChat Widget -->
+
+    <!-- JavaScript Redirection after Delay -->
+    <script>
+        setTimeout(function() {
+            window.location.href = "https://m.me/187720794434952?ref=_wilkommen";
+        }, 4000); // Delay in milliseconds (here: 4000ms or 4 seconds)
+    </script>
+    <!-- End JavaScript Redirection after Delay -->
+
+    <!-- Auswahl zwischen Desktop- und mobiler Version -->
+    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
+        <button onclick="chooseVersion('desktop')">Desktop-Version</button>
+        <button onclick="chooseVersion('mobile')">Mobile Version</button>
+    </div>
+    <!-- End Auswahl zwischen Desktop- und mobiler Version -->
+
+    <!-- HTML-Element zum Öffnen des Books -->
+    <div style="position: fixed; bottom: 50px; left: 20px; z-index: 9999;">
+        <a href="javascript:void(0);" onclick="openBook()">Öffne Book</a>
+    </div>
+    <!-- End HTML-Element zum Öffnen des Books -->
+
+    <!-- Assembly Code -->
+    <script>
+        // Hier Assembly-Code einfügen
+        // Zum Beispiel:
+        console.log("Assembly Code wird hier eingefügt...");
+    </script>
+    <!-- End Assembly Code -->
+
+    <!-- React Component -->
+    <div id="root"></div>
+    <script type="text/javascript">
+        const { useState } = React;
+
+        function LandingPage() {
+            const [isDesktopVersion, setIsDesktopVersion] = useState(true);
+
+            const chooseVersion = (version) => {
+                setIsDesktopVersion(version === 'desktop');
+            };
+
+            const openBook = () => {
+                // Hier wird das ManyChat-Widget sichtbar gemacht
+                document.getElementById('book-widget').classList.remove('hidden');
+            };
+
+            return (
+                <div>
+                    <h1>Willkommen auf meiner Homepage</h1>
+                    <p>Hauptmenü.</p>
+
+                    {/* Animation */}
+                    <div className="animation-container">
+                        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" className="animated-object upper" alt="Obere Animation" style={{ width: '70%' }} />
+                        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" className="animated-object lower" alt="Untere Animation" style={{ width: '70%' }} />
+                    </div>
+                    {/* End Animation */}
+
+                    {/* Book Widget (vorerst ausgeblendet) */}
+                    <div id="book-widget" style={{ position: 'fixed', bottom: '0', right: '20px', zIndex: '9999' }}>
+                        {/* Book Widget-Code hier einfügen */}
+                        <script src="//widget.book.com/187720794434952.js" async="async"></script>
+                    </div>
+                    {/* End Book Widget */}
+
+                    {/* ManyChat Widget */}
+                    <div id="manychat-widget" style={{ position: 'fixed', bottom: '0', right: '20px', zIndex: '9999' }}>
+                        {/* Hier wird die 2. Landingpage nach der Verzögerung eingefügt */}
+                        <iframe src="zweite_landingpage.html" scrolling="no" style={{ width: '100%', height: '100%', border: 'none' }}></iframe>
+                        {/* Ende des Einfügens der 2. Landingpage */}
+                    </div>
+                    {/* End ManyChat Widget */}
+
+                    {/* JavaScript Redirection after Delay */}
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "https://m.me/187720794434952?ref=_wilkommen";
+                        }, 4000); // Delay in milliseconds (here: 4000ms or 4 seconds)
+                    </script>
+                    {/* End JavaScript Redirection after Delay */}
+
+                    {/* Auswahl zwischen Desktop- und mobiler Version */}
+                    <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '9999' }}>
+                        <button onClick={() => chooseVersion('desktop')}>Desktop-Version</button>
+                        <button onClick={() => chooseVersion('mobile')}>Mobile Version</button>
+                    </div>
+                    {/* End Auswahl zwischen Desktop- und mobiler Version */}
+
+                    {/* HTML-Element zum Öffnen des Books */}
+                    <div style={{ position: 'fixed', bottom: '50px', left: '20px', zIndex: '9999' }}>
+                        <a href="javascript:void(0);" onClick={openBook}>Öffne Book</a>
+                    </div>
+                    {/* End HTML-Element zum Öffnen des Books */}
+
+                    {/* Kamera */}
+                    <Webcam />
+
+                    {/* GPS */}
+                    {props.isGeolocationAvailable && props.isGeolocationEnabled && props.coords ? (
+                        <div>
+                            Latitude: {props.coords.latitude}
+                            Longitude: {props.coords.longitude}
+                        </div>
+                    ) : (
+                        <div>GPS-Daten nicht verfügbar</div>
+                    )}
+
+                    {/* Nachrichten */}
+                    <MessageBox
+                        position={'left'}
+                        text={'Nachrichtentext'}
+                        type={'text'}
+                    />
+                </div>
+            );
+        }
+
+        ReactDOM.render(<LandingPage />, document.getElementById('root'));
+    </script>
+    <!-- End React Component -->
+</body>
+</html>
