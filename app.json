@@ -1,0 +1,10 @@
+{
+  "name": "MeineAnwendung",
+  "description": "KING",
+  "scripts": {
+    "test": "npm test"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
