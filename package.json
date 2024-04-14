@@ -1,0 +1,12 @@
+// package.json des ersten Projekts
+{
+  "name": "MeineAnwendung",
+  "description": "KING",
+  "scripts": {
+    "start": "node server.js", // Angepasstes Startskript für das erste Projekt
+    "test": "npm test"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
