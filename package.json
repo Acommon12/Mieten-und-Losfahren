@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Acommon12/Mieten-und-Losfahren/issues"
   },
-  "homepage": "https://github.com/Acommon12/Mieten-und-Losfahren#readme"
+  "homepage": "https://github.com/Acommon12/Mieten-und-Losfahren#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }

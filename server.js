@@ -1,24 +1,38 @@
+require('dotenv').config(); // Lade Umgebungsvariablen aus der .env-Datei
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const server = http.createServer((req, res) => {
-  const filePath = path.join(__dirname, 'index.html'); // Pfad zur index.html-Datei
+// Pfad zur index.html-Datei
+const filePath = path.join(__dirname, 'index.html');
 
-  fs.readFile(filePath, (err, content) => {
-    if (err) {
-      res.writeHead(500);
-      res.end(`Server Error: ${err.code}`);
-      return;
-    }
+// Überprüfen, ob die index.html-Datei vorhanden ist
+fs.access(filePath, fs.constants.F_OK, (err) => {
+  if (err) {
+    console.error(`Die Datei ${filePath} konnte nicht gefunden werden.`);
+    process.exit(1); // Beende den Prozess mit Fehlercode 1
+  }
 
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(content, 'utf-8');
+  // Erzeuge den HTTP-Server
+  const server = http.createServer((req, res) => {
+    fs.readFile(filePath, (err, content) => {
+      if (err) {
+        res.writeHead(500);
+        res.end(`Server Error: ${err.code}`);
+        return;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(content, 'utf-8');
+    });
   });
-});
 
-const PORT = parseInt(process.env.PORT, 10) || 6969; // Verwende den von Heroku bereitgestellten Port oder Port 6969 als Standardwert
+  // Portkonfiguration
+  const PORT = process.env.PORT || 6969;
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  // Starte den Server
+  server.listen(PORT, () => {
+    console.log(`Server läuft auf Port ${PORT}`);
+  });
 });
