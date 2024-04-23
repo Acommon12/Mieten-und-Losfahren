@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page mit Book und ManyChat Widgets</title>
+    <!-- GitHub Image Import -->
+    <link rel="import" href="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png">
+    <!-- End GitHub Image Import -->
+    <!-- Styling for Animation -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/960x1200spsale.png");
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            position: relative; /* Setze Position auf relativ */
+        }
+
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .animated-object {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .animated-object.upper {
+            top: 0;
+            left: -100px;
+            animation-name: moveRightTop;
+        }
+
+        .animated-object.lower {
+            bottom: 0;
+            left: -100px;
+            animation-name: moveRightBottom;
+        }
+
+        @keyframes moveRightTop {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
+        @keyframes moveRightBottom {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+
+        /* Increase button size */
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+        }
+
+        /* Style for the buttons in the second landing page */
+        #second-page-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: calc(50% - 3.5cm); /* Centering buttons */
+            z-index: 9999;
+        }
+
+        /* Add space between buttons */
+        #second-page-buttons button {
+            margin-right: 2cm;
+        }
+
+        /* Animation für die zweite Landingpage */
+        .second-page .animated-object {
+            animation-duration: 10s;
+        }
+    </style>
+    <!-- End Styling for Animation -->
+
+    <!-- JavaScript für die Auswahl zwischen Desktop- und mobiler Version -->
+    <script>
+        function chooseVersion(version) {
+            if (version === 'desktop') {
+                document.getElementById('mobile-styles').remove();
+            } else if (version === 'mobile') {
+                var style = document.createElement('style');
+                style.setAttribute('id', 'mobile-styles');
+                style.innerHTML = `
+                    /* Hier die zusätzlichen Stile für die mobile Version einfügen */
+                    body {
+                        background-size: 100%;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        function openBook() {
+            // Hier wird das ManyChat-Widget sichtbar gemacht
+            document.getElementById('book-widget').classList.remove('hidden');
+        }
+
+        function showManyChatMessage() {
+            // Hier wird die ManyChat-Nachricht angezeigt
+            // Füge den JSON-Code hier ein
+            var message = {
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Danke für Ihr Interesse! Bitte bestätigen Sie Ihre Anmeldung, indem Sie auf die Schaltfläche unten klicken."
+                    }
+                ],
+                "quick_replies": [
+                    {
+                        "type": "button",
+                        "title": "Ja, Ich möchte beitreten",
+                        "payload": "{\"action\":\"subscribe\"}"
+                    }
+                ]
+            };
+
+            // Hier wird der Code für die Anzeige der ManyChat-Nachricht eingefügt
+            console.log(message); // Nur zu Demonstrationszwecken, ersetze diesen Teil durch den Code zum Anzeigen der Nachricht
+        }
+    </script>
+    <!-- End JavaScript für die Auswahl zwischen Desktop- und mobiler Version -->
+
+</head>
+<body class="second-page">
+    <!-- Landing Page Content -->
+    <div>
+        <h1>Willkommen auf meiner Homepage</h1>
+        <p>Hauptmenü.</p>
+    </div>
+    <!-- End Landing Page Content -->
+
+    <!-- Animation -->
+    <div class="animation-container">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object upper" alt="Obere Animation" style="width: 115%;">
+        <img src="https://raw.githubusercontent.com/Acommon12/Mieten-und-Losfahren/main/728x90spsale.png" class="animated-object lower" alt="Untere Animation" style="width: 200%;">
+    </div>
+    <!-- End Animation -->
+
+    <!-- Book Widget (vorerst ausgeblendet) -->
+    <div id="book-widget" class="hidden" style="position: fixed; bottom: 0; right: 20px; z-index: 9999;">
+        <!-- Book Widget-Code hier einfügen -->
+        <script src="//widget.book.com/187720794434952.js" async="async"></script>
+    </div>
+    <!-- End Book Widget -->
+
+    <!-- ManyChat Widget -->
+    <div id="manychat-widget" style="position: fixed; bottom: 0; right: 20px; z-index: 9999;">
+        <!-- Hier wird die 2. Landingpage nach der Verzögerung eingefügt -->
+        <iframe src="zweite_landingpage.html" scrolling="no" style="width: 100%; height: 100%; border: none;"></iframe>
+        <!-- Ende des Einfügens der 2. Landingpage -->
+    </div>
+    <!-- End ManyChat Widget -->
+
+    <!-- JavaScript Redirection after Delay -->
+    <script>
+        setTimeout(function() {
+            // Lade die Indexseite erneut
+            window.location.reload();
+        }, 7000); // Delay in milliseconds (hier: 7000ms oder 7 Sekunden)
+    </script>
+    <!-- End JavaScript Redirection after Delay -->
+
+    <!-- Auswahl zwischen Desktop- und mobiler Version -->
+    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
+        <button onclick="chooseVersion('desktop')">Desktop-Version</button>
+        <button onclick="chooseVersion('mobile')">Mobile Version</button>
+    </div>
+    <!-- End Auswahl zwischen Desktop- und mobiler Version -->
+
+    <!-- HTML-Element zum Öffnen des Books -->
+    <div style="position: fixed; bottom: 50px; left: 20px; z-index: 9999;">
+        <a href="javascript:void(0);" onclick="openBook()">Öffne Book</a>
+    </div>
+    <!-- End HTML-Element zum Öffnen des Books -->
+
+    <!-- Button für die ManyChat-Nachricht -->
+    <div style="position: fixed; bottom: 80px; left: 20px; z-index: 9999;">
+        <button onclick="showManyChatMessage()">Bestätigen Sie Ihre Anmeldung</button>
+    </div>
+    <!-- End Button für die ManyChat-Nachricht -->
+
+</body>
+</html>
